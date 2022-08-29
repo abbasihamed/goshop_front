@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goshop/injection.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'src/config/app_router.dart';
@@ -10,6 +11,8 @@ void main() {
   setPathUrlStrategy();
 
   AppRouter.defineRoute();
+
+  setup();
 
   runApp(const MyApp());
 }

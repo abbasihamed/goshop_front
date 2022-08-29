@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:goshop/src/presentation/logic/get_store_controller.dart';
 import 'package:goshop/src/presentation/logic/scroll_controller.dart';
 
 import '../../../components/nav_bar_list_items.dart';
@@ -20,14 +21,19 @@ class NavBarList extends StatelessWidget {
           cursor: SystemMouseCursors.grab,
           child: GetBuilder<ListScrollController>(
             builder: (controller) {
-              return ListView.builder(
-                controller: controller.scrollController,
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return NvaBarListItems(index: index);
-                },
-              );
+              return GetBuilder<StoresController>(builder: (store) {
+                return ListView.builder(
+                  controller: controller.scrollController,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: store.storeList.length,
+                  itemBuilder: (context, index) {
+                    return NvaBarListItems(
+                      index: index,
+                      storesController: store,
+                    );
+                  },
+                );
+              });
             },
           ),
         ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:goshop/src/presentation/logic/get_category_controller.dart';
+import 'package:goshop/src/presentation/logic/get_store_controller.dart';
 import 'package:goshop/src/presentation/logic/scroll_controller.dart';
 
 import '../../components/custom_textfields.dart';
@@ -15,6 +17,8 @@ class HomeDesktopscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     Get.lazyPut(() => ListScrollController());
+    Get.lazyPut(() => StoresController());
+    Get.lazyPut(() => CategoryController());
     return Directionality(
       textDirection: TextDirection.rtl,
       child: SafeArea(

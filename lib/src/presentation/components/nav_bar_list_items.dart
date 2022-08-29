@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:goshop/src/core/constants.dart';
+import 'package:goshop/src/presentation/logic/get_store_controller.dart';
 
 class NvaBarListItems extends StatelessWidget {
-  const NvaBarListItems({Key? key, required this.index}) : super(key: key);
+  const NvaBarListItems({
+    Key? key,
+    required this.index,
+    required this.storesController,
+  }) : super(key: key);
 
   final int index;
+  final StoresController storesController;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +28,15 @@ class NvaBarListItems extends StatelessWidget {
               Center(
                 child: Stack(
                   children: [
-                    Image.asset('assets/logos/goshop_logo.png'),
+                    storesController.storeList[index].images!.isNotEmpty
+                        ? SizedBox(
+                            height: 300,
+                            child: Image.network(
+                              '$baseUrl/${storesController.storeList[index].images?[0].image}',
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        : Image.asset('assets/logos/goshop_logo.png'),
                     Positioned(
                       bottom: 0,
                       left: 5,
@@ -46,13 +61,14 @@ class NvaBarListItems extends StatelessWidget {
                     style: theme.textTheme.subtitle2,
                   ),
                   Text(
-                    'بایلی شاپ',
+                    storesController.storeList[index].name ?? 'نامشخص',
                     style: theme.textTheme.subtitle2,
                   ),
                 ],
               ),
               Text(
-                'کالای دیجیتال',
+                storesController.storeList[index].categories?.categoryName ??
+                    'نامشخص',
                 style: theme.textTheme.subtitle2,
               ),
               SizedBox(

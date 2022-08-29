@@ -40,9 +40,10 @@ class StoreDesktopScreen extends StatelessWidget {
                               mainAxisSpacing: 10,
                             ),
                             itemBuilder: (context, index) {
-                              return NvaBarListItems(
-                                index: index,
-                              );
+                              return const SizedBox();
+                              // return NvaBarListItems(
+                              //   index: index,
+                              // );
                             },
                           ),
                         ),
