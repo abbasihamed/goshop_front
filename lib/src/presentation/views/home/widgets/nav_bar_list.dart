@@ -21,19 +21,21 @@ class NavBarList extends StatelessWidget {
           cursor: SystemMouseCursors.grab,
           child: GetBuilder<ListScrollController>(
             builder: (controller) {
-              return GetBuilder<StoresController>(builder: (store) {
-                return ListView.builder(
-                  controller: controller.scrollController,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: store.storeList.length,
-                  itemBuilder: (context, index) {
-                    return NvaBarListItems(
-                      index: index,
-                      storesController: store,
-                    );
-                  },
-                );
-              });
+              return GetBuilder<StoresController>(
+                builder: (store) {
+                  return ListView.builder(
+                    controller: controller.scrollController,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: store.storeList.length,
+                    itemBuilder: (context, index) {
+                      return NvaBarListItems(
+                        index: index,
+                        storesController: store,
+                      );
+                    },
+                  );
+                },
+              );
             },
           ),
         ),

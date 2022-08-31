@@ -11,4 +11,14 @@ class StoreApiService {
     );
     return response;
   }
+
+  Future<http.Response> getStoreSubCategory(int id) async {
+    var response = await http.get(
+      Uri.parse('$baseUrl/store/get/store/subCategory=$id'),
+      headers: {
+        'accept': 'application/json',
+      },
+    );
+    return response;
+  }
 }

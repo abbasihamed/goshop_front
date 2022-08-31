@@ -24,7 +24,7 @@ class HomeDesktopscreen extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: theme.backgroundColor,
-          body: Padding(
+          body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
@@ -33,7 +33,7 @@ class HomeDesktopscreen extends StatelessWidget {
                   width: double.infinity,
                   child: Row(
                     children: [
-                      const SideBar(),
+                      const Expanded(child: SideBar()),
                       Expanded(
                         flex: 5,
                         child: SizedBox(

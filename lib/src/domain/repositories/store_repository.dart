@@ -3,4 +3,5 @@ import 'package:goshop/src/data/models/store_models.dart';
 
 abstract class StoreRepository {
   Future<DataState<List<StoreModel>>> getAllStores();
+  Future<DataState<List<StoreModel>>> getStoreSubCategoryId(int id);
 }

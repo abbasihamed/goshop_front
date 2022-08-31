@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goshop/src/config/app_router.dart';
 import 'package:goshop/src/core/constants.dart';
 import 'package:goshop/src/presentation/logic/get_store_controller.dart';
 
@@ -19,7 +20,9 @@ class NvaBarListItems extends StatelessWidget {
       padding: EdgeInsets.only(left: index == 9 ? 0 : 38, top: 28),
       child: InkWell(
         overlayColor: MaterialStateProperty.all(Colors.transparent),
-        onTap: () {},
+        onTap: () {
+          AppRouter.appRouter.navigateTo(context, '/store-detail');
+        },
         child: SizedBox(
           width: 300,
           child: Column(

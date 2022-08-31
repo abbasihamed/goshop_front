@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:goshop/injection.dart';
 import 'package:goshop/src/core/data_state.dart';
 import 'package:goshop/src/data/models/store_models.dart';
@@ -19,6 +17,19 @@ class StoreRepositoryImpl implements StoreRepository {
       return const Failed('Invalid Response');
     } catch (e) {
       return const Failed('Unknown error');
+    }
+  }
+
+  @override
+  Future<DataState<List<StoreModel>>> getStoreSubCategoryId(int id) async {
+    try {
+      final response = await storeService.getStoreSubCategory(id);
+      if (response.statusCode == 200) {
+        return Success(storeModelFromJson(utf8.decode(response.bodyBytes)));
+      }
+      return const Failed('Invalid Response');
+    } catch (e) {
+      return const Failed('Unkown Response');
     }
   }
 }

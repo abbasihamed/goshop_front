@@ -35,16 +35,19 @@ class CategoryModel {
 
 class SubCategory {
   SubCategory({
+    this.subCategoryId,
     this.subCategoryName,
   });
-
+  int? subCategoryId;
   String? subCategoryName;
 
   factory SubCategory.fromJson(Map<String, dynamic> json) => SubCategory(
+        subCategoryId: json['sub_category_id'],
         subCategoryName: json["sub_category_name"],
       );
 
   Map<String, dynamic> toJson() => {
+        "sub_category_id": subCategoryId,
         "sub_category_name": subCategoryName,
       };
 }

@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:goshop/src/presentation/views/home/home_desktop_screen.dart';
+import 'package:goshop/src/presentation/views/store_details/store_detail_desktop_screen.dart';
 import 'package:goshop/src/presentation/views/stores/stores_desktop_screen.dart';
 
 class AppRouter {
@@ -9,12 +10,17 @@ class AppRouter {
     return const HomeDesktopscreen();
   });
 
-  static Handler storePage = Handler(handlerFunc: (context, parameters) {
+  static Handler storesPage = Handler(handlerFunc: (context, parameters) {
     return const StoreDesktopScreen();
+  });
+
+  static Handler storeDetailPage = Handler(handlerFunc: (context, parameters) {
+    return const StoreDetailDesktopScreen();
   });
 
   static void defineRoute() {
     appRouter.define('/', handler: homePage);
-    appRouter.define('/store', handler: storePage);
+    appRouter.define('/stores', handler: storesPage);
+    appRouter.define('/store-detail', handler: storeDetailPage);
   }
 }
