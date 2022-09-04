@@ -1,8 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:goshop/src/core/keys.dart';
 import 'package:goshop/src/presentation/components/top_bar.dart';
 
-class StoreDetailDesktopScreen extends StatelessWidget {
+class StoreDetailDesktopScreen extends StatefulWidget {
   const StoreDetailDesktopScreen({Key? key}) : super(key: key);
+
+  @override
+  State<StoreDetailDesktopScreen> createState() =>
+      _StoreDetailDesktopScreenState();
+}
+
+class _StoreDetailDesktopScreenState extends State<StoreDetailDesktopScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
+  late ScrollController scrollController;
+
+  bool isShow = true;
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController = ScrollController();
+    tabController = TabController(length: 2, vsync: this);
+
+    scrollController.addListener(() {
+      isShow = scrollController.offset < 300;
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,81 +36,290 @@ class StoreDetailDesktopScreen extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: theme.backgroundColor,
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: SingleChildScrollView(
+            backgroundColor: theme.backgroundColor,
+            body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                children: [
-                  const TopBar(),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              height: 600,
-                              width: 150,
-                              child: ListView.builder(
-                                itemCount: 4,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(bottom: 8),
-                                    child: Image.asset(
-                                        'assets/logos/goshop_logo.png'),
-                                  );
-                                },
+              child: SingleChildScrollView(
+                controller: scrollController,
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Column(
+                  children: [
+                    const TopBar(),
+                    const SizedBox(height: 28),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 645,
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 500,
+                                      width: 130,
+                                      child: ListView.builder(
+                                        itemCount: 4,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 8),
+                                            child: Image.asset(
+                                                'assets/logos/goshop_logo.png'),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    const SizedBox(width: 12),
+                                    SizedBox(
+                                      height: 500,
+                                      child: Image.asset(
+                                        'assets/logos/goshop_logo.png',
+                                        fit: BoxFit.contain,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(height: 32),
+                                Container(
+                                  height: 250,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: theme.colorScheme.secondary),
+                                      borderRadius: BorderRadius.circular(16)),
+                                )
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 26),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'بایلی شاپ',
+                                    style: theme.textTheme.headline6!.copyWith(
+                                        color: theme.colorScheme.secondary),
+                                  ),
+                                  const SizedBox(height: 18),
+                                  Text(
+                                    'توضیحات',
+                                    style: theme.textTheme.subtitle1,
+                                  ),
+                                  const SizedBox(height: 18),
+                                  SizedBox(
+                                    height: 150,
+                                    width: 600,
+                                    child: Text(
+                                      'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد',
+                                      style: theme.textTheme.subtitle2,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 18),
+                                  TabBar(
+                                    onTap: (index) {},
+                                    mouseCursor: SystemMouseCursors.click,
+                                    controller: tabController,
+                                    isScrollable: true,
+                                    unselectedLabelColor:
+                                        theme.colorScheme.secondary,
+                                    unselectedLabelStyle:
+                                        theme.textTheme.subtitle2,
+                                    labelStyle: theme.textTheme.subtitle1,
+                                    labelColor: theme.colorScheme.secondary,
+                                    indicator: UnderlineTabIndicator(
+                                      borderSide: BorderSide(
+                                        color: theme.primaryColor,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    overlayColor: MaterialStateProperty.all(
+                                        Colors.transparent),
+                                    indicatorPadding:
+                                        const EdgeInsets.symmetric(
+                                            horizontal: 15),
+                                    tabs: const [
+                                      Text('حضوری'),
+                                      Text('آنلاین'),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 200,
+                                    width: double.infinity,
+                                    child: TabBarView(
+                                      controller: tabController,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 28),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            'آدرس : ',
+                                                            style: theme
+                                                                .textTheme
+                                                                .subtitle1,
+                                                          ),
+                                                          Text(
+                                                            'شمس تبریزی، کوچه هاشمی وند، پلاک 6 واحد 2',
+                                                            style: theme
+                                                                .textTheme
+                                                                .subtitle2,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 12),
+                                                      Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            'ساعات کاری : ',
+                                                            style: theme
+                                                                .textTheme
+                                                                .subtitle1,
+                                                          ),
+                                                          Text(
+                                                            '9 الی 14 - 16 الی 22',
+                                                            style: theme
+                                                                .textTheme
+                                                                .subtitle2,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  InkWell(
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    onTap: () {},
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          'شعبه ها',
+                                                          style: theme.textTheme
+                                                              .subtitle2,
+                                                        ),
+                                                        Icon(
+                                                          Icons
+                                                              .arrow_forward_ios_rounded,
+                                                          size: 16,
+                                                          color: theme
+                                                              .primaryColor,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Container(
+                                                height: 150,
+                                                width: 200,
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                      const Color(0xFFD9D9D9),
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.map,
+                                                      size: 48,
+                                                    ),
+                                                    const SizedBox(height: 8),
+                                                    Text(
+                                                      'مشاهده موقعیت فروشگاه روی نقشه',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: theme
+                                                          .textTheme.subtitle2,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Column(),
+                                      ],
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
-                            const Spacer(),
-                            SizedBox(
-                              height: 600,
-                              child: Image.asset(
-                                'assets/logos/goshop_logo.png',
-                                fit: BoxFit.contain,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 26),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'بایلی شاپ',
-                                style: theme.textTheme.headline6!.copyWith(
-                                    color: theme.colorScheme.secondary),
-                              ),
-                              const SizedBox(height: 36),
-                              Text(
-                                'توضیحات:',
-                                style: theme.textTheme.subtitle1,
-                              ),
-                              const SizedBox(height: 16),
-                              Container(
-                                height: 300,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  border: Border.all(),
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                              ),
-                            ],
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  )
-                ],
+                    ),
+                    Container(
+                      key: linkListKey,
+                      height: MediaQuery.of(context).size.height,
+                      width: double.infinity,
+                      color: Colors.amber,
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: isShow
+                ? InkWell(
+                    hoverColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    onTap: () {
+                      scrollController.position.ensureVisible(
+                        linkListKey.currentContext!.findRenderObject()!,
+                        duration: const Duration(milliseconds: 300),
+                      );
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'دیدگاه ها',
+                          style: theme.textTheme.subtitle1,
+                        ),
+                        Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          size: 32,
+                          color: theme.primaryColor,
+                        ),
+                      ],
+                    ),
+                  )
+                : null),
       ),
     );
   }
