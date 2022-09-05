@@ -1,31 +1,39 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFields extends StatelessWidget {
+  final ThemeData theme;
+  final String? hintText;
+  final double? height;
+  final double? width;
+  final Widget? suffixIcon;
+  final int? maxLines;
   const CustomTextFields({
     Key? key,
     required this.theme,
+    this.hintText,
+    this.height = 55,
+    this.width = 750,
+    this.maxLines = 1,
+    this.suffixIcon,
   }) : super(key: key);
-
-  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 55,
-      width: 750,
+      height: height,
+      width: width,
       padding: const EdgeInsets.only(right: 8),
-      decoration: BoxDecoration(
-          border: Border.all(
-            color: theme.colorScheme.outline,
-          ),
-          borderRadius: BorderRadius.circular(16)),
       child: TextField(
+        maxLines: maxLines,
         decoration: InputDecoration(
-          hintText: 'گوشاپ',
+          hintText: hintText,
           hintStyle:
               theme.textTheme.subtitle1!.copyWith(color: theme.hintColor),
-          suffixIcon: const Icon(Icons.search),
+          suffixIcon: suffixIcon,
           border: InputBorder.none,
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(color: theme.colorScheme.outline)),
         ),
       ),
     );

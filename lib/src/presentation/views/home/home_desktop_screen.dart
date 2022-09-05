@@ -43,7 +43,11 @@ class HomeDesktopscreen extends StatelessWidget {
                               alignment: Alignment.topCenter,
                               child: Column(
                                 children: [
-                                  CustomTextFields(theme: theme),
+                                  CustomTextFields(
+                                    theme: theme,
+                                    hintText: 'گوشاپ',
+                                    suffixIcon: const Icon(Icons.search),
+                                  ),
                                   const SizedBox(height: 200),
                                   MostViewedNavBar(theme: theme),
                                   const NavBarList(),
