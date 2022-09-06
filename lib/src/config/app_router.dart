@@ -1,4 +1,5 @@
 import 'package:fluro/fluro.dart';
+import 'package:goshop/src/data/models/store_models.dart';
 import 'package:goshop/src/presentation/views/home/home_desktop_screen.dart';
 import 'package:goshop/src/presentation/views/store_details/store_detail_desktop_screen.dart';
 import 'package:goshop/src/presentation/views/stores/stores_desktop_screen.dart';
@@ -15,7 +16,8 @@ class AppRouter {
   });
 
   static Handler storeDetailPage = Handler(handlerFunc: (context, parameters) {
-    return const StoreDetailDesktopScreen();
+    return StoreDetailDesktopScreen(
+        storeModel: context!.settings!.arguments as StoreModel);
   });
 
   static void defineRoute() {
