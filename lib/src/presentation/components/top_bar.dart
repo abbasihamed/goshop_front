@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goshop/src/config/app_router.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({Key? key}) : super(key: key);
@@ -17,7 +18,9 @@ class TopBar extends StatelessWidget {
           hoverColor: Colors.transparent,
           splashColor: Colors.transparent,
           overlayColor: MaterialStateProperty.all(Colors.transparent),
-          onTap: () {},
+          onTap: () {
+            AppRouter.appRouter.navigateTo(context, '/authentication');
+          },
           child: Text(
             'ورود / ثبت نام',
             style: Theme.of(context).textTheme.subtitle1,

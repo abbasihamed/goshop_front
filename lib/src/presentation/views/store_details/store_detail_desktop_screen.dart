@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:goshop/src/core/keys.dart';
-import 'package:goshop/src/data/models/store_models.dart';
 import 'package:goshop/src/presentation/components/top_bar.dart';
 import 'package:goshop/src/presentation/views/store_details/widget/bottom_section.dart';
 import 'package:goshop/src/presentation/views/store_details/widget/top_section.dart';
 
 class StoreDetailDesktopScreen extends StatefulWidget {
-  final StoreModel storeModel;
   const StoreDetailDesktopScreen({
     Key? key,
-    required this.storeModel,
   }) : super(key: key);
 
   @override
@@ -37,7 +34,6 @@ class _StoreDetailDesktopScreenState extends State<StoreDetailDesktopScreen>
 
   @override
   Widget build(BuildContext context) {
-    print(widget.storeModel);
     final theme = Theme.of(context);
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -54,8 +50,7 @@ class _StoreDetailDesktopScreenState extends State<StoreDetailDesktopScreen>
                   children: [
                     const TopBar(),
                     const SizedBox(height: 28),
-                    DetailTopSection(
-                        theme: theme, tabController: tabController),
+                    DetailTopSection(tabController: tabController),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                     DetailBottomSection(theme: theme),
                   ],

@@ -1,5 +1,5 @@
 import 'package:fluro/fluro.dart';
-import 'package:goshop/src/data/models/store_models.dart';
+import 'package:goshop/src/presentation/views/auth/auth_desktop_screen.dart';
 import 'package:goshop/src/presentation/views/home/home_desktop_screen.dart';
 import 'package:goshop/src/presentation/views/store_details/store_detail_desktop_screen.dart';
 import 'package:goshop/src/presentation/views/stores/stores_desktop_screen.dart';
@@ -16,13 +16,22 @@ class AppRouter {
   });
 
   static Handler storeDetailPage = Handler(handlerFunc: (context, parameters) {
-    return StoreDetailDesktopScreen(
-        storeModel: context!.settings!.arguments as StoreModel);
+    return const StoreDetailDesktopScreen();
+  });
+
+  static Handler authPage = Handler(handlerFunc: (context, parameters) {
+    return const AuthDesktopScreen();
+  });
+
+  static Handler authVerifyPage = Handler(handlerFunc: (context, parameters) {
+    return const AuthDesktopScreen();
   });
 
   static void defineRoute() {
     appRouter.define('/', handler: homePage);
     appRouter.define('/stores', handler: storesPage);
     appRouter.define('/store-detail', handler: storeDetailPage);
+    appRouter.define('/authentication', handler: authPage);
+    appRouter.define('/authentication-verify', handler: authVerifyPage);
   }
 }

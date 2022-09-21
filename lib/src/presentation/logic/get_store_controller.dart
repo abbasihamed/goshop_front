@@ -10,17 +10,25 @@ class StoresController extends GetxController {
   final storeSubCategory = injection.get<GetStoreSubCategoryUseCase>();
 
   List<StoreModel> _storeLists = [];
+  StoreModel? _store;
 
   List<StoreModel> get storeList => _storeLists;
+  StoreModel? get store => _store;
 
   setStoreData(List<StoreModel> data) {
     _storeLists = data;
     update();
   }
 
+  setSpecificStore(StoreModel data) {
+    _store = data;
+    update();
+  }
+
   getAllStore() async {
     final response = await storeUsecase.call();
     if (response is Success) {
+      setSpecificStore(response.data![0]);
       setStoreData(response.data!);
     }
   }

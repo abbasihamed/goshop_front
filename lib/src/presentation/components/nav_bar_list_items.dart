@@ -21,13 +21,8 @@ class NvaBarListItems extends StatelessWidget {
       child: InkWell(
         overlayColor: MaterialStateProperty.all(Colors.transparent),
         onTap: () {
-          AppRouter.appRouter.navigateTo(
-            context,
-            '/store-detail',
-            routeSettings: RouteSettings(
-              arguments: storesController.storeList[index],
-            ),
-          );
+          AppRouter.appRouter.navigateTo(context, '/store-detail');
+          storesController.setSpecificStore(storesController.storeList[index]);
         },
         child: SizedBox(
           width: 300,

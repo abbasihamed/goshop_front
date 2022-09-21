@@ -1,9 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:goshop/src/core/constants.dart';
 import 'package:goshop/src/core/keys.dart';
 import 'package:goshop/src/presentation/components/custom_button.dart';
 import 'package:goshop/src/presentation/components/custom_textfields.dart';
+import 'package:goshop/src/presentation/logic/get_store_controller.dart';
 
 class DetailBottomSection extends StatelessWidget {
   const DetailBottomSection({
@@ -162,61 +165,74 @@ class DetailBottomSection extends StatelessWidget {
             child: Container(
               height: 600,
               width: 500,
-              padding: const EdgeInsets.symmetric(horizontal: 22),
+              padding: const EdgeInsets.symmetric(horizontal: 22,vertical: 22),
               margin: const EdgeInsets.only(bottom: 40),
               decoration: BoxDecoration(
                   border: Border.all(),
                   borderRadius: BorderRadius.circular(16)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 22),
-                    child: Image.asset(
-                      'assets/logos/goshop_logo.png',
-                      height: 300,
-                      width: 500,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Row(
+              child: GetBuilder<StoresController>(
+                builder: (store) {
+                  return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'بایلی شاپ',
-                        style: theme.textTheme.headline6!
-                            .copyWith(color: theme.colorScheme.secondary),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 22),
+                            child: SizedBox(
+                              height: 300,
+                              width: 500,
+                              child: store.store?.images![0].image != null
+                                  ? Image.network(
+                                      '$baseUrl/${store.store?.images![0].image}',
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset('assets/logos/goshop_logo.png'),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                store.store?.name! ?? '',
+                                style: theme.textTheme.headline6!.copyWith(
+                                    color: theme.colorScheme.secondary),
+                              ),
+                              CustomButton(
+                                theme: theme,
+                                height: 50,
+                                title: 'اطلاعات تماس',
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'توضیحات',
+                            style: theme.textTheme.subtitle1,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            store.store?.description! ?? '',
+                            style: theme.textTheme.subtitle2!
+                                .copyWith(fontSize: 16),
+                          ),
+                        ],
                       ),
-                      CustomButton(
-                        theme: theme,
-                        height: 50,
-                        title: 'اطلاعات تماس',
-                        onPressed: () {},
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Image.asset('assets/logos/telegram.png', height: 18),
+                          const SizedBox(width: 3),
+                          Image.asset('assets/logos/whatsapp.png', height: 18),
+                          const SizedBox(width: 3),
+                          Image.asset('assets/logos/instagram.png', height: 18),
+                        ],
                       ),
                     ],
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'توضیحات',
-                    style: theme.textTheme.subtitle1,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد',
-                    style: theme.textTheme.subtitle2!.copyWith(fontSize: 16),
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Image.asset('assets/logos/telegram.png', height: 18),
-                      const SizedBox(width: 3),
-                      Image.asset('assets/logos/whatsapp.png', height: 18),
-                      const SizedBox(width: 3),
-                      Image.asset('assets/logos/instagram.png', height: 18),
-                    ],
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           )
