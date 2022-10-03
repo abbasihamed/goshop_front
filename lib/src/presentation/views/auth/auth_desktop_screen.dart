@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:goshop/src/config/app_router.dart';
 import 'package:goshop/src/presentation/components/custom_button.dart';
 import 'package:goshop/src/presentation/components/custom_textfields.dart';
+import 'package:goshop/src/presentation/logic/auth_constroller.dart';
 
 class AuthDesktopScreen extends StatelessWidget {
-  const AuthDesktopScreen({Key? key}) : super(key: key);
+  TextEditingController controller = TextEditingController();
+
+  AuthDesktopScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,65 @@ class AuthDesktopScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: SizedBox(
               height: MediaQuery.of(context).size.height,
-              child: AuthCard(),
+              child: AuthCard(
+                authItems: [
+                  Text(
+                    'شماره موبایل خود را وارد نمایید',
+                    style: theme.textTheme.subtitle2,
+                  ),
+                  const SizedBox(height: 26),
+                  CustomTextFields(
+                    theme: theme,
+                    controller: controller,
+                  ),
+                  const SizedBox(height: 26),
+                  Center(
+                    child: CustomButton(
+                      theme: theme,
+                      title: 'ورود',
+                      onPressed: () {
+                        Get.find<AuthController>()
+                            .sendMobile(controller.text.trim());
+                        AppRouter.appRouter.navigateTo(
+                          context,
+                          '/authentication-verify',
+                          routeSettings: RouteSettings(
+                            arguments: controller.text.trim(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 36),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        'ورود شمار به معنای قبول ',
+                        style:
+                            theme.textTheme.subtitle2!.copyWith(fontSize: 16),
+                      ),
+                      InkWell(
+                        hoverColor: Colors.transparent,
+                        splashColor: Colors.transparent,
+                        overlayColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                        onTap: () {},
+                        child: Text(
+                          'قوانین و مقررات ',
+                          style: theme.textTheme.subtitle2!.copyWith(
+                              fontSize: 16, color: theme.primaryColor),
+                        ),
+                      ),
+                      Text(
+                        'می باشد',
+                        style:
+                            theme.textTheme.subtitle2!.copyWith(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -28,8 +90,10 @@ class AuthDesktopScreen extends StatelessWidget {
 }
 
 class AuthCard extends StatelessWidget {
+  final List<Widget> authItems;
   const AuthCard({
     Key? key,
+    required this.authItems,
   }) : super(key: key);
 
   @override
@@ -68,49 +132,7 @@ class AuthCard extends StatelessWidget {
               style: theme.textTheme.subtitle1,
             ),
             const SizedBox(height: 26),
-            Text(
-              'شماره موبایل خود را وارد نمایید',
-              style: theme.textTheme.subtitle2,
-            ),
-            const SizedBox(height: 26),
-            CustomTextFields(
-              theme: theme,
-            ),
-            const SizedBox(height: 26),
-            Center(
-              child: CustomButton(
-                theme: theme,
-                title: 'ورود',
-                onPressed: () {
-                  AppRouter.appRouter.navigateTo(context, '/authentication-verify');
-                },
-              ),
-            ),
-            const SizedBox(height: 36),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  'ورود شمار به معنای قبول ',
-                  style: theme.textTheme.subtitle2!.copyWith(fontSize: 16),
-                ),
-                InkWell(
-                  hoverColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  overlayColor: MaterialStateProperty.all(Colors.transparent),
-                  onTap: () {},
-                  child: Text(
-                    'قوانین و مقررات ',
-                    style: theme.textTheme.subtitle2!
-                        .copyWith(fontSize: 16, color: theme.primaryColor),
-                  ),
-                ),
-                Text(
-                  'می باشد',
-                  style: theme.textTheme.subtitle2!.copyWith(fontSize: 16),
-                ),
-              ],
-            ),
+            ...authItems,
           ],
         ),
       ),

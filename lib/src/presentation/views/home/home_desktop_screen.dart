@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:goshop/src/presentation/logic/auth_constroller.dart';
 import 'package:goshop/src/presentation/logic/get_category_controller.dart';
 import 'package:goshop/src/presentation/logic/get_store_controller.dart';
 import 'package:goshop/src/presentation/logic/scroll_controller.dart';
+import 'package:goshop/src/presentation/logic/timer_controller.dart';
 
 import '../../components/custom_textfields.dart';
 import '../../components/top_bar.dart';
@@ -19,6 +21,8 @@ class HomeDesktopscreen extends StatelessWidget {
     Get.lazyPut(() => ListScrollController());
     Get.lazyPut(() => StoresController());
     Get.lazyPut(() => CategoryController());
+    Get.lazyPut(() => TimerController());
+    Get.lazyPut(() => AuthController());
     return Directionality(
       textDirection: TextDirection.rtl,
       child: SafeArea(

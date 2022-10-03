@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goshop/injection.dart';
+import 'package:goshop/src/core/keys.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'src/config/app_router.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      navigatorKey: navKey,
       title: projectName,
       theme: AppTheme.appTheme,
       scrollBehavior: CustomScrollConfig(),

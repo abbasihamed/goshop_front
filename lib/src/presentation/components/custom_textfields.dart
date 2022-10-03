@@ -7,6 +7,7 @@ class CustomTextFields extends StatelessWidget {
   final double? width;
   final Widget? suffixIcon;
   final int? maxLines;
+  final TextEditingController? controller;
   const CustomTextFields({
     Key? key,
     required this.theme,
@@ -15,6 +16,7 @@ class CustomTextFields extends StatelessWidget {
     this.width = 750,
     this.maxLines = 1,
     this.suffixIcon,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -24,6 +26,7 @@ class CustomTextFields extends StatelessWidget {
       width: width,
       padding: const EdgeInsets.only(right: 8),
       child: TextField(
+        controller: controller,
         maxLines: maxLines,
         decoration: InputDecoration(
           hintText: hintText,
