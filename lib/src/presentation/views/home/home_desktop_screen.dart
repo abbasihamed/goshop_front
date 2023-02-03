@@ -46,11 +46,128 @@ class HomeDesktopscreen extends StatelessWidget {
                   ),
                 ),
                 HomeStoreBody(),
+                HomeFooter()
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class HomeFooter extends StatelessWidget {
+  const HomeFooter({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 290,
+      width: double.infinity,
+      color: AppColors.hint.withOpacity(0.1),
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 150, right: 150, top: 32),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const FooterBasicData(
+                      title: 'دسترسی سریع',
+                      subtitle: [
+                        'درباره ما',
+                        'بلاگ',
+                        'نقشه سایت',
+                        'فرصت های شغلی',
+                      ],
+                    ),
+                    SizedBox(width: width(context) * 0.1),
+                    const FooterBasicData(
+                      title: 'راهنمای مشتریان',
+                      subtitle: [
+                        'سوالات متداول',
+                        'تماس با پشتیبانی',
+                        'راهنما و پشتیبانی',
+                        'قوانین و مقررات',
+                      ],
+                    ),
+                    SizedBox(width: width(context) * 0.1),
+                    const FooterBasicData(
+                      title: 'خدمات',
+                      subtitle: [
+                        'همه فروشگاه ها',
+                        'همه مشاوران',
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SizedBox(
+              // height: 100,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Image.asset(
+                      'assets/image/footer.png',
+                      fit: BoxFit.fitWidth,
+                      color: AppColors.hint.withOpacity(.5),
+                    ),
+                  ),
+                  Expanded(
+                    child: Image.asset(
+                      'assets/image/footer2.png',
+                      fit: BoxFit.fitWidth,
+                      color: AppColors.hint.withOpacity(.5),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class FooterBasicData extends StatelessWidget {
+  final String title;
+  final List<String> subtitle;
+  const FooterBasicData({
+    super.key,
+    required this.title,
+    required this.subtitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: textTheme(context).labelMedium,
+        ),
+        const SizedBox(height: 24),
+        ...subtitle.map((e) {
+          int index = subtitle.indexOf(e);
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Text(
+              subtitle[index],
+              style: textTheme(context).subtitle1,
+            ),
+          );
+        }),
+      ],
     );
   }
 }
@@ -90,7 +207,7 @@ class HomeStoreBody extends StatelessWidget {
           const SizedBox(height: 24),
           SizedBox(
             width: double.infinity,
-            height: 500,
+            height: 570,
             child: GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               itemCount: 12,
@@ -98,7 +215,7 @@ class HomeStoreBody extends StatelessWidget {
                 crossAxisCount: 6,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                mainAxisExtent: 250,
+                mainAxisExtent: 280,
               ),
               itemBuilder: (context, index) {
                 return Column(
@@ -156,13 +273,61 @@ class HomeStoreBody extends StatelessWidget {
                       style: textTheme(context).subtitle1,
                     ),
                     Row(
-                      children: [],
-                    )
+                      children: List.generate(
+                        4,
+                        (index) => Stack(
+                          children: const [
+                            Icon(
+                              Icons.fiber_manual_record_outlined,
+                              color: Color(0xFFFC5A5A),
+                              size: 30,
+                            ),
+                            Positioned(
+                              top: 0,
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: Icon(
+                                Icons.fiber_manual_record,
+                                color: Color(0xFFFC5A5A),
+                                size: 18,
+                              ),
+                            )
+                          ],
+                        ),
+                      ).toList(),
+                    ),
                   ],
                 );
               },
             ),
           ),
+          const SizedBox(height: 40),
+          InkWell(
+            onTap: () {},
+            child: Container(
+              width: width(context) * 0.1,
+              height: 45,
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'آگهی های بیشتر',
+                    style: textTheme(context)
+                        .button!
+                        .copyWith(fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(width: 4),
+                  const Icon(Icons.keyboard_arrow_down),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 68),
         ],
       ),
     );
@@ -352,20 +517,26 @@ class HomeHeader extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 35),
+          const SizedBox(height: 36.5),
           SizedBox(
             height: 120,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/image/home_header2.png',
-                  fit: BoxFit.cover,
+                Expanded(
+                  child: Image.asset(
+                    'assets/image/home_header.png',
+                    fit: BoxFit.fitWidth,
+                    color: AppColors.hint,
+                  ),
                 ),
-                Image.asset(
-                  'assets/image/home_header.png',
-                  fit: BoxFit.cover,
+                Expanded(
+                  child: Image.asset(
+                    'assets/image/home_header2.png',
+                    fit: BoxFit.fitWidth,
+                    color: AppColors.hint,
+                  ),
                 ),
               ],
             ),
