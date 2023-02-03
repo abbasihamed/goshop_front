@@ -34,7 +34,6 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  google_fonts: ^3.0.1
   fluro: ^2.0.3
   url_strategy: ^0.2.0
   get: ^4.6.5
@@ -42,6 +41,7 @@ dependencies:
   shared_preferences: ^2.0.15
   http: ^0.13.5
   get_it: ^7.2.0
+  flutter_hooks: ^0.18.5+1
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +68,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/logos/
+    - assets/image/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -81,12 +82,30 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: Dana
+      fonts:
+        - asset: assets/fonts/Dana-Regular.ttf
+        - asset: assets/fonts/Dana-Thin.ttf
+        - asset: assets/fonts/Dana-Medium.ttf
+        - asset: assets/fonts/Dana-Light.ttf
+        - asset: assets/fonts/Dana-Bold.ttf
+        - asset: assets/fonts/Dana-Black.ttf
+        - asset: assets/fonts/Dana-DemiBold.ttf
+        - asset: assets/fonts/Dana-ExtraBold.ttf
+        - asset: assets/fonts/Dana-ExtraLight.ttf
+        - asset: assets/fonts/Dana-FaNum-Black.ttf
+        - asset: assets/fonts/Dana-FaNum-Bold.ttf
+        - asset: assets/fonts/Dana-FaNum-DemiBold.ttf
+        - asset: assets/fonts/Dana-FaNum-ExtraBold.ttf
+        - asset: assets/fonts/Dana-FaNum-ExtraLight.ttf
+        - asset: assets/fonts/Dana-FaNum-light.ttf
+        - asset: assets/fonts/Dana-FaNum-Medium.ttf
+        - asset: assets/fonts/Dana-FaNum-Regular.ttf
+        - asset: assets/fonts/Dana-FaNum-Thin.ttf
+        - asset: assets/fonts/Dana-FaNum-light.ttf
+        - asset: assets/fonts/Dana-FaNum-UltraBold.ttf
+        - asset: assets/fonts/Dana-UltraBold.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

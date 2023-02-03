@@ -4,7 +4,7 @@ import 'package:goshop/src/core/keys.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'src/config/app_router.dart';
-import 'src/config/app_theme.dart';
+import 'src/config/theme/app_theme.dart';
 import 'src/config/scroll_config.dart';
 import 'src/core/constants.dart';
 

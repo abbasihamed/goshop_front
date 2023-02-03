@@ -48,7 +48,7 @@ class _StoreDetailDesktopScreenState extends State<StoreDetailDesktopScreen>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const TopBar(),
+                     TopBar(),
                     const SizedBox(height: 28),
                     DetailTopSection(tabController: tabController),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),

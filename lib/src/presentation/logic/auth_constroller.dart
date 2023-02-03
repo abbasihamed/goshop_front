@@ -11,9 +11,19 @@ class AuthController extends GetxController {
   final authUsecase = injection.get<SendMobileUseCase>();
   final verifyUsecase = injection.get<SendVerifyCodeUseCase>();
 
+  String? _tokenValue;
+
+  String? get tokenValue => _tokenValue;
+
   saveToken(String token) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
+  }
+
+  getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    _tokenValue = prefs.getString('token');
+    update();
   }
 
   sendMobile(String mobileNumber) async {

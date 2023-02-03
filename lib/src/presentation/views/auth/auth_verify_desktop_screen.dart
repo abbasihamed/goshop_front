@@ -67,8 +67,6 @@ class AuthVerifyCodedesktopScreen extends StatelessWidget {
                         onPressed: () {
                           Get.find<AuthController>()
                               .sendVerifyCode(mobileNumber, constroller.text);
-                          // AppRouter.appRouter
-                          //     .navigateTo(context, '/authentication-verify');
                         },
                       ),
                     ),

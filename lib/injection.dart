@@ -17,6 +17,7 @@ import 'package:goshop/src/domain/usecase/get_category_usecase.dart';
 import 'package:goshop/src/domain/usecase/get_store_subcategory_usecase.dart';
 import 'package:goshop/src/domain/usecase/get_stores_usecase.dart';
 import 'package:goshop/src/domain/usecase/get_subcategory_usecase.dart';
+import 'package:goshop/src/presentation/components/custom_dropDown.dart';
 
 final injection = GetIt.I;
 
@@ -37,4 +38,6 @@ void setup() {
   injection.registerLazySingleton(() => GetSubCategoryUseCase(injection()));
   injection.registerLazySingleton(() => SendMobileUseCase(injection()));
   injection.registerLazySingleton(() => SendVerifyCodeUseCase(injection()));
+
+  injection.registerLazySingleton(() => CustomDropDown());
 }
