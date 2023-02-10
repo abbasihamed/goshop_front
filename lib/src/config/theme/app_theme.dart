@@ -16,6 +16,11 @@ class AppTheme {
           overlayColor: MaterialStateProperty.all(Colors.transparent),
         ),
       ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: Color(0xFF171725),
+        centerTitle: true,
+        toolbarHeight: 80,
+      ),
       iconTheme: const IconThemeData(
         color: AppColors.icon,
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:goshop/src/config/responsive/mediaquery_getter.dart';
 import 'package:goshop/src/config/theme/app_colors.dart';
 import 'package:goshop/src/config/theme/theme_getter.dart';
 
@@ -12,7 +11,7 @@ class SuggestionOverlay {
     overlayEntry = OverlayEntry(
       builder: (context) {
         return Positioned(
-          width: width(context) * 0.51,
+          width: link.leaderSize!.width - 5,
           child: CompositedTransformFollower(
             link: link,
             offset: const Offset(0, 70),

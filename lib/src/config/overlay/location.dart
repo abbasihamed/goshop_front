@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
-import 'package:goshop/src/config/responsive/mediaquery_getter.dart';
 import 'package:goshop/src/config/theme/app_colors.dart';
 import 'package:goshop/src/config/theme/theme_getter.dart';
 
@@ -13,10 +12,10 @@ class LoactionOverlay {
     overlayEntry = OverlayEntry(
       builder: (context) {
         return Positioned(
-          width: width(context) * 0.33,
+          width: link.leaderSize!.width - 5,
           child: CompositedTransformFollower(
             link: link,
-            offset: const Offset(-200, 70),
+            offset: const Offset(0, 70),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(6),
               child: Material(
@@ -82,6 +81,7 @@ class LoactionOverlay {
                                   child: Text(
                                     'سعادت آباد، میدان فرهنگ، خ آبشار، نبش کوچه کوهسار، کوچه هاشمی وند',
                                     style: textTheme(context).subtitle1,
+                                    textAlign: TextAlign.end,
                                   ),
                                 ),
                               ),

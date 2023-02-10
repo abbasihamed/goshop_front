@@ -1,90 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:goshop/src/core/keys.dart';
-import 'package:goshop/src/presentation/components/top_bar.dart';
-import 'package:goshop/src/presentation/views/store_details/widget/bottom_section.dart';
-import 'package:goshop/src/presentation/views/store_details/widget/top_section.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:goshop/src/config/responsive/mediaquery_getter.dart';
+import 'package:goshop/src/config/theme/app_colors.dart';
+import 'package:goshop/src/config/theme/theme_getter.dart';
+import 'package:goshop/src/presentation/views/home/home_desktop_screen.dart';
 
-class StoreDetailDesktopScreen extends StatefulWidget {
+class StoreDetailDesktopScreen extends HookWidget {
   const StoreDetailDesktopScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<StoreDetailDesktopScreen> createState() =>
-      _StoreDetailDesktopScreenState();
-}
-
-class _StoreDetailDesktopScreenState extends State<StoreDetailDesktopScreen>
-    with SingleTickerProviderStateMixin {
-  late TabController tabController;
-  late ScrollController scrollController;
-
-  bool isShow = true;
-
-  @override
-  void initState() {
-    super.initState();
-    scrollController = ScrollController();
-    tabController = TabController(length: 2, vsync: this);
-    scrollController.addListener(() {
-      isShow = scrollController.offset < 300;
-      setState(() {});
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
       child: SafeArea(
         child: Scaffold(
-            backgroundColor: theme.backgroundColor,
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: SingleChildScrollView(
-                controller: scrollController,
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: SearchBox(
+              boxWidth: width(context) * 0.55,
+              searchWidth: width(context) * 0.23,
+              locationWidth: width(context) * 0.2,
+            ),
+            leadingWidth: 400,
+            leading: TextButton.icon(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.account_circle_outlined,
+                color: AppColors.icon,
+              ),
+              label: Text(
+                'حساب کاربری',
+                style: textTheme(context).headline2,
+              ),
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 100),
+                child: Row(
                   children: [
-                     TopBar(),
-                    const SizedBox(height: 28),
-                    DetailTopSection(tabController: tabController),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-                    DetailBottomSection(theme: theme),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'همه خدمات',
+                        style: textTheme(context).headline2,
+                      ),
+                    ),
+                    SizedBox(width: width(context) * 0.03),
+                    Text(
+                      'نیازمندی‌های همشهری',
+                      style: textTheme(context).headline1,
+                    ),
                   ],
                 ),
               ),
+            ],
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [],
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: isShow
-                ? InkWell(
-                    hoverColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    onTap: () {
-                      scrollController.position.ensureVisible(
-                        linkListKey.currentContext!.findRenderObject()!,
-                        duration: const Duration(milliseconds: 300),
-                      );
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'دیدگاه ها',
-                          style: theme.textTheme.subtitle1,
-                        ),
-                        Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          size: 32,
-                          color: theme.primaryColor,
-                        ),
-                      ],
-                    ),
-                  )
-                : null),
+          ),
+        ),
       ),
     );
   }
