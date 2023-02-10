@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:goshop/injection.dart';
+import 'package:goshop/src/config/overlay/location.dart';
+import 'package:goshop/src/config/overlay/search_suggestion.dart';
 import 'package:goshop/src/config/responsive/mediaquery_getter.dart';
 import 'package:goshop/src/config/theme/app_colors.dart';
 import 'package:goshop/src/config/theme/theme_getter.dart';
@@ -403,13 +407,15 @@ class CategoryItems extends StatelessWidget {
   }
 }
 
-class HomeHeader extends StatelessWidget {
+class HomeHeader extends HookWidget {
   const HomeHeader({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final searchLink = useState(LayerLink());
+    final locationLink = useState(LayerLink());
     return Container(
       height: 480,
       width: double.infinity,
@@ -476,15 +482,31 @@ class HomeHeader extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      HomeHeaderSearchFiled(
-                        width: width(context) * 0.5,
-                        hintText: 'جستجوی خدمات',
-                        hasRaduis: true,
+                      CompositedTransformTarget(
+                        link: searchLink.value,
+                        child: HomeHeaderSearchFiled(
+                          width: width(context) * 0.5,
+                          hintText: 'جستجوی خدمات',
+                          hasRaduis: true,
+                          onTap: () {
+                            injection
+                                .get<SuggestionOverlay>()
+                                .toggelSugges(context, searchLink.value);
+                          },
+                        ),
                       ),
-                      HomeHeaderSearchFiled(
-                        width: width(context) * 0.23,
-                        hintText: 'آدرس',
-                        hasRaduis: false,
+                      CompositedTransformTarget(
+                        link: locationLink.value,
+                        child: HomeHeaderSearchFiled(
+                          width: width(context) * 0.23,
+                          hintText: 'آدرس',
+                          hasRaduis: false,
+                          onTap: () {
+                            injection
+                                .get<LoactionOverlay>()
+                                .toggelSugges(context, locationLink.value);
+                          },
+                        ),
                       ),
                       InkWell(
                         onTap: () {},
@@ -551,11 +573,13 @@ class HomeHeaderSearchFiled extends StatelessWidget {
   final String hintText;
   final double width;
   final bool hasRaduis;
+  final VoidCallback? onTap;
   const HomeHeaderSearchFiled({
     Key? key,
     required this.hintText,
     required this.width,
     required this.hasRaduis,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -572,6 +596,7 @@ class HomeHeaderSearchFiled extends StatelessWidget {
             : null,
       ),
       child: TextFormField(
+        onTap: onTap,
         decoration: InputDecoration(
           hintText: hintText,
         ),

@@ -40,6 +40,11 @@ class AppTheme {
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),
+        overline: TextStyle(
+          color: Color(0xFF696974),
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+        ),
         subtitle1: TextStyle(
           color: Color(0xFF696974),
           fontSize: 14,

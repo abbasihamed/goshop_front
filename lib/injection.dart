@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:goshop/src/config/overlay/location.dart';
+import 'package:goshop/src/config/overlay/search_suggestion.dart';
 import 'package:goshop/src/data/remote/auth_api_service.dart';
 import 'package:goshop/src/data/remote/category_api_services.dart';
 import 'package:goshop/src/data/remote/store_api_services.dart';
@@ -22,6 +24,9 @@ import 'package:goshop/src/presentation/components/custom_dropDown.dart';
 final injection = GetIt.I;
 
 void setup() {
+  injection.registerLazySingleton(() => SuggestionOverlay());
+  injection.registerLazySingleton(() => LoactionOverlay());
+
   injection.registerLazySingleton<StoreApiService>(() => StoreApiService());
   injection.registerLazySingleton(() => CategoryApiService());
   injection.registerLazySingleton(() => SubCategoryApiServices());
