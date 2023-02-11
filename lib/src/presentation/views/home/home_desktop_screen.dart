@@ -279,7 +279,7 @@ class HomeStoreBody extends StatelessWidget {
                     ),
                     Row(
                       children: List.generate(
-                        4,
+                        5,
                         (index) => Stack(
                           children: const [
                             Icon(
@@ -522,68 +522,71 @@ class SearchBox extends HookWidget {
   Widget build(BuildContext context) {
     final searchLink = useState(LayerLink());
     final locationLink = useState(LayerLink());
-    return Container(
-      height: 75,
-      width: boxWidth ?? width(context) * 0.9,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Row(
-        children: [
-          CompositedTransformTarget(
-            link: searchLink.value,
-            child: HomeHeaderSearchFiled(
-              width: searchWidth ?? width(context) * 0.5,
-              hintText: 'جستجوی خدمات',
-              hasRaduis: true,
-              onTap: () {
-                injection
-                    .get<SuggestionOverlay>()
-                    .toggelSugges(context, searchLink.value);
-              },
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Container(
+        height: 75,
+        width: boxWidth ?? width(context) * 0.9,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Row(
+          children: [
+            CompositedTransformTarget(
+              link: searchLink.value,
+              child: HomeHeaderSearchFiled(
+                width: searchWidth ?? width(context) * 0.5,
+                hintText: 'جستجوی خدمات',
+                hasRaduis: true,
+                onTap: () {
+                  injection
+                      .get<SuggestionOverlay>()
+                      .toggelSugges(context, searchLink.value);
+                },
+              ),
             ),
-          ),
-          CompositedTransformTarget(
-            link: locationLink.value,
-            child: HomeHeaderSearchFiled(
-              width: locationWidth ?? width(context) * 0.23,
-              hintText: 'آدرس',
-              hasRaduis: false,
-              onTap: () {
-                injection
-                    .get<LoactionOverlay>()
-                    .toggelSugges(context, locationLink.value);
-              },
+            CompositedTransformTarget(
+              link: locationLink.value,
+              child: HomeHeaderSearchFiled(
+                width: locationWidth ?? width(context) * 0.23,
+                hintText: 'آدرس',
+                hasRaduis: false,
+                onTap: () {
+                  injection
+                      .get<LoactionOverlay>()
+                      .toggelSugges(context, locationLink.value);
+                },
+              ),
             ),
-          ),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              width: width(context) * 0.097,
-              height: height(context),
-              decoration: const BoxDecoration(
-                color: AppColors.primary,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(4),
-                  topLeft: Radius.circular(4),
+            InkWell(
+              onTap: () {},
+              child: Container(
+                width: width(context) * 0.097,
+                height: height(context),
+                decoration: const BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(4),
+                    topLeft: Radius.circular(4),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.search),
+                    const SizedBox(width: 4),
+                    Text(
+                      'جستجو',
+                      style: textTheme(context).button,
+                    ),
+                  ],
                 ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.search),
-                  const SizedBox(width: 4),
-                  Text(
-                    'جستجو',
-                    style: textTheme(context).button,
-                  ),
-                ],
-              ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
