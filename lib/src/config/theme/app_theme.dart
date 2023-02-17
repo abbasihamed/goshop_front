@@ -16,7 +16,7 @@ class AppTheme {
           overlayColor: MaterialStateProperty.all(Colors.transparent),
         ),
       ),
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         backgroundColor: Color(0xFF171725),
         centerTitle: true,
         toolbarHeight: 80,

@@ -3,7 +3,8 @@ import 'package:goshop/src/presentation/views/auth/auth_desktop_screen.dart';
 import 'package:goshop/src/presentation/views/auth/auth_verify_desktop_screen.dart';
 import 'package:goshop/src/presentation/views/home/home_desktop_screen.dart';
 import 'package:goshop/src/presentation/views/profile/profile_desktop_screen.dart';
-import 'package:goshop/src/presentation/views/store_details/store_detail_desktop_screen.dart';
+import 'package:goshop/src/presentation/views/store_details/store_details_desktop.dart';
+import 'package:goshop/src/presentation/views/stores_list/stores_list_desktop_screen.dart';
 import 'package:goshop/src/presentation/views/stores/stores_desktop_screen.dart';
 
 class AppRouter {
@@ -17,9 +18,13 @@ class AppRouter {
     return StoreDesktopScreen();
   });
 
-  static Handler storeDetailPage = Handler(handlerFunc: (context, parameters) {
-    return const StoreDetailDesktopScreen();
+  static Handler storesListPage = Handler(handlerFunc: (context, parameters) {
+    return const StoreslistDesktopScreen();
   });
+
+  static Handler storeDetailPage = Handler(
+    handlerFunc: (context, parameters) => const StoreDetailsDesktop(),
+  );
 
   static Handler authPage = Handler(handlerFunc: (context, parameters) {
     return AuthDesktopScreen();
@@ -37,6 +42,7 @@ class AppRouter {
   static void defineRoute() {
     appRouter.define('/', handler: homePage);
     appRouter.define('/stores', handler: storesPage);
+    appRouter.define('/stores-list', handler: storesListPage);
     appRouter.define('/store-detail', handler: storeDetailPage);
     appRouter.define('/authentication', handler: authPage);
     appRouter.define('/authentication-verify', handler: authVerifyPage);

@@ -7,6 +7,7 @@ import 'package:goshop/src/config/overlay/search_suggestion.dart';
 import 'package:goshop/src/config/responsive/mediaquery_getter.dart';
 import 'package:goshop/src/config/theme/app_colors.dart';
 import 'package:goshop/src/config/theme/theme_getter.dart';
+import 'package:goshop/src/presentation/views/stores_list/stores_list_desktop_screen.dart';
 
 class HomeDesktopscreen extends StatelessWidget {
   const HomeDesktopscreen({Key? key}) : super(key: key);
@@ -223,94 +224,14 @@ class HomeStoreBody extends StatelessWidget {
                 mainAxisExtent: 280,
               ),
               itemBuilder: (context, index) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Stack(
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(6),
-                            child: Image.asset(
-                              'assets/image/sample.png',
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 10,
-                          right: 10,
-                          child: Container(
-                            height: 30,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              color: AppColors.scaffold,
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset(
-                                  'assets/image/ticket.png',
-                                  color: const Color(0xFF82C43C),
-                                ),
-                                const Text(
-                                  'آنلاین',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xFF82C43C),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'نمایندگی فروش خودرو ایران خودرو',
-                      style: textTheme(context).labelMedium,
-                    ),
-                    Text(
-                      'فاصله تا کاربر 2.2 کیلومتر',
-                      style: textTheme(context).subtitle1,
-                    ),
-                    Row(
-                      children: List.generate(
-                        5,
-                        (index) => Stack(
-                          children: const [
-                            Icon(
-                              Icons.fiber_manual_record_outlined,
-                              color: Color(0xFFFC5A5A),
-                              size: 30,
-                            ),
-                            Positioned(
-                              top: 0,
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: Icon(
-                                Icons.fiber_manual_record,
-                                color: Color(0xFFFC5A5A),
-                                size: 18,
-                              ),
-                            )
-                          ],
-                        ),
-                      ).toList(),
-                    ),
-                  ],
-                );
+                return const StoreItem();
               },
             ),
           ),
           const SizedBox(height: 40),
           InkWell(
             onTap: () {
-              AppRouter.appRouter.navigateTo(context, '/store-detail');
+              AppRouter.appRouter.navigateTo(context, '/stores-list');
             },
             child: Container(
               width: width(context) * 0.1,

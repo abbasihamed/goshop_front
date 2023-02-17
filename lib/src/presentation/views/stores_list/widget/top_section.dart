@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:goshop/src/data/models/sub_category_models.dart';
 import 'package:goshop/src/presentation/components/custom_button.dart';
 import 'package:goshop/src/presentation/logic/get_store_controller.dart';
-import 'package:goshop/src/presentation/views/store_details/widget/store_detail_images.dart';
-import 'package:goshop/src/presentation/views/store_details/widget/store_rating.dart';
+import 'package:goshop/src/presentation/views/stores_list/widget/store_detail_images.dart';
+import 'package:goshop/src/presentation/views/stores_list/widget/store_rating.dart';
 
 class DetailTopSection extends StatefulWidget {
   const DetailTopSection({
