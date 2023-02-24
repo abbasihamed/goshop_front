@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:goshop/src/config/app_router.dart';
 import 'package:goshop/src/config/responsive/mediaquery_getter.dart';
 import 'package:goshop/src/config/theme/app_colors.dart';
 import 'package:goshop/src/config/theme/theme_getter.dart';
@@ -86,7 +87,10 @@ class AuthVerifyCodedesktopScreen extends StatelessWidget {
                           const SizedBox(height: 42),
                           Center(
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                AppRouter.appRouter
+                                    .navigateTo(context, '/profile');
+                              },
                               child: Container(
                                 width: width(context),
                                 height: 45,
