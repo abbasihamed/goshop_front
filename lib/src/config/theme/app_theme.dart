@@ -24,6 +24,7 @@ class AppTheme {
       iconTheme: const IconThemeData(
         color: AppColors.icon,
       ),
+      
       textTheme: const TextTheme(
         headline1: TextStyle(
           color: Colors.white,

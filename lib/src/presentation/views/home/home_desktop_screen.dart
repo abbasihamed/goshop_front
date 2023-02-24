@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:goshop/injection.dart';
 import 'package:goshop/src/config/app_router.dart';
@@ -369,7 +370,10 @@ class HomeHeader extends HookWidget {
                       ],
                     ),
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        AppRouter.appRouter
+                            .navigateTo(context, '/authentication');
+                      },
                       icon: const Icon(
                         Icons.account_circle_outlined,
                         color: AppColors.icon,
@@ -518,12 +522,21 @@ class HomeHeaderSearchFiled extends StatelessWidget {
   final double width;
   final bool hasRaduis;
   final VoidCallback? onTap;
+  final TextInputType? textInputType;
+  final TextAlign? textAlign;
+  final TextInputAction? textInputAction;
+  final List<TextInputFormatter>? textInputFormatter;
+
   const HomeHeaderSearchFiled({
     Key? key,
     required this.hintText,
     required this.width,
     required this.hasRaduis,
     this.onTap,
+    this.textInputType,
+    this.textAlign = TextAlign.right,
+    this.textInputAction,
+    this.textInputFormatter,
   }) : super(key: key);
 
   @override
@@ -541,6 +554,10 @@ class HomeHeaderSearchFiled extends StatelessWidget {
       ),
       child: TextFormField(
         onTap: onTap,
+        keyboardType: textInputType,
+        textAlign: textAlign!,
+        textInputAction: textInputAction,
+        inputFormatters: textInputFormatter,
         decoration: InputDecoration(
           hintText: hintText,
         ),

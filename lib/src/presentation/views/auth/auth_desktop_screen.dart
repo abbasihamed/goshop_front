@@ -1,87 +1,113 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter/services.dart';
 import 'package:goshop/src/config/app_router.dart';
-import 'package:goshop/src/presentation/components/custom_button.dart';
-import 'package:goshop/src/presentation/components/custom_textfields.dart';
-import 'package:goshop/src/presentation/logic/auth_constroller.dart';
+import 'package:goshop/src/config/responsive/mediaquery_getter.dart';
+import 'package:goshop/src/config/theme/app_colors.dart';
+import 'package:goshop/src/config/theme/theme_getter.dart';
+import 'package:goshop/src/presentation/views/home/home_desktop_screen.dart';
+import 'package:goshop/src/presentation/views/store_details/store_details_desktop.dart';
 
-class AuthDesktopScreen extends StatelessWidget {
-  TextEditingController controller = TextEditingController();
-
-  AuthDesktopScreen({Key? key}) : super(key: key);
+class SendMobileNumber extends StatelessWidget {
+  const SendMobileNumber({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Directionality(
       textDirection: TextDirection.rtl,
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: theme.backgroundColor,
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: AuthCard(
-                authItems: [
-                  Text(
-                    'شماره موبایل خود را وارد نمایید',
-                    style: theme.textTheme.subtitle2,
-                  ),
-                  const SizedBox(height: 26),
-                  CustomTextFields(
-                    theme: theme,
-                    controller: controller,
-                  ),
-                  const SizedBox(height: 26),
-                  Center(
-                    child: CustomButton(
-                      theme: theme,
-                      title: 'ورود',
-                      onPressed: () {
-                        Get.find<AuthController>()
-                            .sendMobile(controller.text.trim());
-                        AppRouter.appRouter.navigateTo(
-                          context,
-                          '/authentication-verify',
-                          routeSettings: RouteSettings(
-                            arguments: controller.text.trim(),
+          appBar: const CustomAppBar(showSearch: false),
+          body: Column(
+            children: [
+              Expanded(
+                child: Center(
+                  child: SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 24),
+                      height: 400,
+                      width: width(context) * 0.3,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(6),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color(0xFFF3F3F3),
+                            blurRadius: 8,
+                            spreadRadius: 1,
+                            offset: Offset(2, 2),
                           ),
-                        );
-                      },
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'ورود / ثبت نام',
+                            style: textTheme(context).headlineLarge,
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'لطفا برای ورود یا ثبت نام شماره تلفن همراه خود را وارد کنید.',
+                            style: textTheme(context).subtitle1!.copyWith(
+                                  color: const Color(0xFF92929D),
+                                ),
+                          ),
+                          const SizedBox(height: 32),
+                          Text(
+                            'شماره موبایل',
+                            style: textTheme(context).subtitle1,
+                          ),
+                          const SizedBox(height: 8),
+                          HomeHeaderSearchFiled(
+                            hasRaduis: true,
+                            width: double.infinity,
+                            hintText: '090000000000',
+                            textAlign: TextAlign.left,
+                            textInputType: TextInputType.number,
+                            textInputFormatter: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            'توجه: لطفا پس از ثبت آگهی، از طریق هیچ پیامکی برای پرداخت وجه جهت انتشار آگهی اقدام نکنید.',
+                            style: textTheme(context).subtitle1!.copyWith(
+                                  color: const Color(0xFF92929D),
+                                ),
+                          ),
+                          const SizedBox(height: 32),
+                          Center(
+                            child: InkWell(
+                              onTap: () {
+                                AppRouter.appRouter.navigateTo(
+                                    context, '/authentication-verify');
+                              },
+                              child: Container(
+                                width: width(context),
+                                height: 45,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: AppColors.primary,
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Text(
+                                  'ورود یا ثبت نام',
+                                  style: textTheme(context)
+                                      .button!
+                                      .copyWith(fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 36),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        'ورود شمار به معنای قبول ',
-                        style:
-                            theme.textTheme.subtitle2!.copyWith(fontSize: 16),
-                      ),
-                      InkWell(
-                        hoverColor: Colors.transparent,
-                        splashColor: Colors.transparent,
-                        overlayColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        onTap: () {},
-                        child: Text(
-                          'قوانین و مقررات ',
-                          style: theme.textTheme.subtitle2!.copyWith(
-                              fontSize: 16, color: theme.primaryColor),
-                        ),
-                      ),
-                      Text(
-                        'می باشد',
-                        style:
-                            theme.textTheme.subtitle2!.copyWith(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
-            ),
+              const HomeFooter(),
+            ],
           ),
         ),
       ),
@@ -89,51 +115,34 @@ class AuthDesktopScreen extends StatelessWidget {
   }
 }
 
-class AuthCard extends StatelessWidget {
-  final List<Widget> authItems;
-  const AuthCard({
-    Key? key,
-    required this.authItems,
-  }) : super(key: key);
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Center(
-      child: Container(
-        height: 450,
-        width: 500,
-        padding: const EdgeInsets.all(32),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey[300]!,
-                blurRadius: 15,
-                spreadRadius: 2,
-                offset: const Offset(1, 1),
-              )
-            ]),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Text(
-                'GoShop',
-                style: theme.textTheme.headline6!.copyWith(
-                  color: theme.colorScheme.secondary,
-                ),
-              ),
+    return Container(
+      height: 50,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: TextFormField(
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6),
+            borderSide: const BorderSide(
+              width: 1,
+              color: AppColors.divider,
             ),
-            const SizedBox(height: 36),
-            Text(
-              'ورود | ثبت نام',
-              style: theme.textTheme.subtitle1,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6),
+            borderSide: const BorderSide(
+              width: 1,
+              color: AppColors.divider,
             ),
-            const SizedBox(height: 26),
-            ...authItems,
-          ],
+          ),
         ),
       ),
     );

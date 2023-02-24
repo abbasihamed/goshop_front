@@ -26,15 +26,12 @@ class AppRouter {
     handlerFunc: (context, parameters) => const StoreDetailsDesktop(),
   );
 
-  static Handler authPage = Handler(handlerFunc: (context, parameters) {
-    return AuthDesktopScreen();
-  });
+  static Handler authPage =
+      Handler(handlerFunc: (context, parameters) => const SendMobileNumber());
 
-  static Handler authVerifyPage = Handler(handlerFunc: (context, parameters) {
-    return AuthVerifyCodedesktopScreen(
-      mobileNumber: context!.settings!.arguments as String,
-    );
-  });
+  static Handler authVerifyPage = Handler(
+      handlerFunc: (context, parameters) =>
+          const AuthVerifyCodedesktopScreen());
 
   static Handler profilePage = Handler(handlerFunc: (context, parameters) {
     return const ProfileDesktopScreen();

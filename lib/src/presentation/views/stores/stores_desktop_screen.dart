@@ -4,7 +4,6 @@ import 'package:goshop/injection.dart';
 import 'package:goshop/src/presentation/components/custom_dropDown.dart';
 import 'package:goshop/src/presentation/components/nav_bar_list_items.dart';
 import 'package:goshop/src/presentation/logic/get_store_controller.dart';
-import 'package:goshop/src/presentation/views/home/home_desktop_screen.dart';
 
 import '../../components/top_bar.dart';
 import '../home/widgets/side_bar.dart';

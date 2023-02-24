@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:goshop/src/config/app_router.dart';
 import 'package:goshop/src/config/responsive/mediaquery_getter.dart';
 import 'package:goshop/src/config/theme/app_colors.dart';
 import 'package:goshop/src/config/theme/theme_getter.dart';
@@ -701,7 +702,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: Directionality(
           textDirection: TextDirection.rtl,
           child: TextButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              AppRouter.appRouter.navigateTo(context, '/authentication');
+            },
             icon: const Icon(
               Icons.account_circle_outlined,
               color: AppColors.icon,
