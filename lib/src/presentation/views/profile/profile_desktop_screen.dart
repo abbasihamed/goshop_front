@@ -23,9 +23,22 @@ class ProfileDesktopScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 247),
                   child: Column(
                     children: [
+                      const SizedBox(height: 40),
                       Row(
-                        children: const [
-                          ProfileSideBar(),
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const ProfileSideBar(),
+                          const SizedBox(width: 40),
+                          SizedBox(
+                            width: 856,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: const [
+                                  PersonalInfoCard(),
+                                ],
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ],
@@ -37,6 +50,116 @@ class ProfileDesktopScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class PersonalInfoCard extends StatelessWidget {
+  const PersonalInfoCard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 250,
+      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(6),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0xFFF3F3F3),
+              blurRadius: 8,
+              spreadRadius: 1,
+              offset: Offset(2, 5),
+            )
+          ]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'اطلاعات شخصی',
+                style: textTheme(context).labelMedium,
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'ویرایش اطلاعات',
+                  style: textTheme(context).labelMedium!.copyWith(
+                        color: AppColors.primary,
+                      ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const PersonalInfoInput(
+                title: 'نام کاربری :',
+                value: 'Hamed_abbasi',
+              ),
+              Container(width: 1, height: 50, color: AppColors.divider),
+              const PersonalInfoInput(
+                title: 'تاریخ تولد :',
+                value: '1401/11/05',
+              ),
+              Container(width: 1, height: 50, color: AppColors.divider),
+              const PersonalInfoInput(
+                title: 'تلفن همراه :',
+                value: '090000000000',
+              ),
+              Container(width: 1, height: 50, color: AppColors.divider),
+              const PersonalInfoInput(
+                title: 'ایمیل :',
+                value: 'hamed137881@gmail.com',
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          const Divider(color: AppColors.divider, height: 1),
+          const SizedBox(height: 24),
+          const PersonalInfoInput(
+            title: 'آدرس :',
+            value:
+                'آدرس تهران - خیابان ولیعصر- بالاتر از میدان ونک- خیابان نگار- پلاک ۸',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PersonalInfoInput extends StatelessWidget {
+  final String title;
+  final String value;
+  const PersonalInfoInput({
+    Key? key,
+    required this.title,
+    required this.value,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: textTheme(context).overline,
+        ),
+        const SizedBox(height: 6),
+        Text(
+          value,
+          style: textTheme(context).bodyMedium,
+        ),
+      ],
     );
   }
 }
